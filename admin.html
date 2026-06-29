@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Staff Dashboard — The Gentlemen's Chair</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✂️</text></svg>">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/admin.css">
+</head>
+<body class="admin-body">
+
+<!-- ============ LOGIN ============ -->
+<div class="login-screen" id="loginScreen">
+  <form class="login-card" id="loginForm">
+    <span class="brand-mark login-mark" aria-hidden="true">
+      <svg viewBox="0 0 48 48" width="32" height="32"><path d="M14 8 L34 28 M34 8 L14 28" stroke="currentColor" stroke-width="2.4" fill="none" stroke-linecap="round"/><circle cx="11" cy="11" r="4.4" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="11" cy="25" r="4.4" fill="none" stroke="currentColor" stroke-width="2.4"/></svg>
+    </span>
+    <h1>Staff dashboard</h1>
+    <p>This page is for the salon owner only — bookings, prices and contact requests live here.</p>
+
+    <label for="passInput">Passcode</label>
+    <input type="password" id="passInput" placeholder="Enter staff passcode" autocomplete="off" required>
+    <p class="login-error" id="loginError"></p>
+    <button type="submit" class="btn btn-primary btn-block">Unlock dashboard</button>
+    <a href="index.html" class="back-link">← Back to website</a>
+  </form>
+</div>
+
+<!-- ============ DASHBOARD ============ -->
+<div class="dashboard" id="dashboard" hidden>
+
+  <header class="admin-topbar">
+    <div class="container admin-topbar-inner">
+      <span class="brand-name">The Gentlemen's<em>Chair</em> <span class="admin-tag">Staff</span></span>
+      <div class="admin-topbar-actions">
+        <a href="index.html" class="btn btn-ghost btn-sm">View website</a>
+        <button class="btn btn-ghost btn-sm" id="logoutBtn">Log out</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container admin-main">
+
+    <div class="admin-banner">
+      <strong>Heads up:</strong> this dashboard reads bookings and prices saved in <em>this browser</em> (there's no server behind it). It works perfectly if customers book from this same device/browser — for bookings to show up here from <em>customers' own phones</em>, you'd need to connect it to a small free backend. See <code>README.md</code> for how.
+    </div>
+
+    <!-- STATS -->
+    <section class="stat-grid" id="statGrid"></section>
+
+    <!-- BOOKINGS -->
+    <section class="admin-section">
+      <div class="admin-section-head">
+        <div>
+          <p class="section-eyebrow">Appointments</p>
+          <h2 class="section-title-sm">Bookings</h2>
+        </div>
+        <button class="btn btn-ghost btn-sm" id="exportCsvBtn">Export CSV</button>
+      </div>
+
+      <div class="admin-controls">
+        <input type="search" id="bookingSearch" placeholder="Search by name, phone or service…">
+        <select id="bookingFilter">
+          <option value="all">All bookings</option>
+          <option value="today">Today</option>
+          <option value="upcoming">Upcoming</option>
+          <option value="past">Past</option>
+        </select>
+      </div>
+
+      <div class="table-wrap">
+        <table class="admin-table" id="bookingsTable">
+          <thead>
+            <tr>
+              <th>ID</th><th>Guest</th><th>Service</th><th>Date</th><th>Time</th><th>Stylist</th><th>Price</th><th>Notes</th><th></th>
+            </tr>
+          </thead>
+          <tbody id="bookingsBody"></tbody>
+        </table>
+        <p class="table-empty" id="bookingsEmpty">No bookings yet on this device.</p>
+      </div>
+    </section>
+
+    <!-- SERVICES / PRICING -->
+    <section class="admin-section">
+      <div class="admin-section-head">
+        <div>
+          <p class="section-eyebrow">Menu</p>
+          <h2 class="section-title-sm">Services &amp; pricing</h2>
+        </div>
+        <button class="btn btn-ghost btn-sm" id="resetPricesBtn">Reset built-in prices</button>
+      </div>
+
+      <div class="table-wrap">
+        <table class="admin-table" id="servicesTable">
+          <thead>
+            <tr><th>Name</th><th>Description</th><th>Duration (min)</th><th>Price (₹)</th><th></th></tr>
+          </thead>
+          <tbody id="servicesBody"></tbody>
+        </table>
+      </div>
+
+      <form class="add-service-form" id="addServiceForm">
+        <h3>Add a new service</h3>
+        <div class="add-service-row">
+          <input type="text" id="newSvcName" placeholder="Service name" required>
+          <input type="number" id="newSvcDuration" placeholder="Minutes" min="5" step="5" required>
+          <input type="number" id="newSvcPrice" placeholder="Price ₹" min="0" step="10" required>
+        </div>
+        <input type="text" id="newSvcDesc" placeholder="Short description shown on the website (optional)">
+        <button type="submit" class="btn btn-primary btn-sm">Add service</button>
+      </form>
+    </section>
+
+  </main>
+</div>
+
+<script src="js/services-data.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>

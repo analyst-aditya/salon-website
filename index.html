@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!-- AUTH GUARD: redirect to the login/signup page before anything else
+     loads if nobody is logged in on this browser. Keep this as the very
+     first script in <head> so it runs before the rest of the page paints. -->
+<script>
+(function () {
+  try {
+    var raw = localStorage.getItem("salonUser");
+    var user = raw ? JSON.parse(raw) : null;
+    var adminAuthed = sessionStorage.getItem("salonAdminAuth") === "1";
+    if (!user && !adminAuthed) {
+      window.location.replace("auth.html");
+    }
+  } catch (e) {
+    window.location.replace("auth.html");
+  }
+})();
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Gentlemen's Chair — Men's Grooming Lounge</title>
+<meta name="description" content="A modern men's salon — haircuts, head &amp; body massage, beard grooming and colour. Book your slot online.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✂️</text></svg>">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<nav class="nav" id="nav">
+  <div class="nav-inner container">
+    <a href="#hero" class="brand">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 48 48" width="28" height="28"><path d="M14 8 L34 28 M34 8 L14 28" stroke="currentColor" stroke-width="2.4" fill="none" stroke-linecap="round"/><circle cx="11" cy="11" r="4.4" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="11" cy="25" r="4.4" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M16 18 L40 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </span>
+      <span class="brand-name">The Gentlemen's<em>Chair</em></span>
+    </a>
+
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#booking">Book a Slot</a></li>
+      <li><a href="#visit">Visit Us</a></li>
+      <li id="navAuthSlot"><a href="auth.html">Login / Sign up</a></li>
+      <li><a href="#" class="nav-cta" id="navChatBtn">Chat</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero" id="hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-veil"></div>
+
+  <div class="hero-content container">
+    <p class="eyebrow">Est. for men who don't have time for a bad haircut</p>
+    <h1 class="hero-title">Sharp&nbsp;cuts.<br>Steady&nbsp;hands.<br><span class="accent-text">Zero&nbsp;guesswork.</span></h1>
+    <p class="hero-sub">Hair, beard, colour and a proper head &amp; body massage — booked in under a minute, no waiting around in plastic chairs.</p>
+    <div class="hero-actions">
+      <a href="#booking" class="btn btn-primary">Book Your Slot</a>
+      <a href="#services" class="btn btn-ghost">See the Menu</a>
+    </div>
+  </div>
+
+  <a href="#services" class="scroll-cue" aria-label="Scroll to services">
+    <span></span>
+  </a>
+</header>
+
+<!-- divider -->
+<div class="pole-divider" aria-hidden="true"></div>
+
+<!-- ============ SERVICES ============ -->
+<section class="services" id="services">
+  <div class="container">
+    <p class="section-eyebrow">The Menu</p>
+    <h2 class="section-title">Six things we're genuinely good at</h2>
+    <p class="section-sub">Every service below is bookable in the next section — pick one and the slot you want will already be selected.</p>
+
+    <div class="service-grid" id="serviceGrid">
+      <!-- injected by main.js -->
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHY US STRIP ============ -->
+<section class="why">
+  <div class="container why-grid">
+    <div class="why-item">
+      <span class="why-num">01</span>
+      <h3>Trained hands, not trends</h3>
+      <p>Every stylist apprenticed for years before touching a paying head. We follow your face, not whatever's on Instagram this week.</p>
+    </div>
+    <div class="why-item">
+      <span class="why-num">02</span>
+      <h3>One chair, your time</h3>
+      <p>Slots are real slots. Book 4:30, get seen at 4:30. If we're running late, we'll message you before you've even left home.</p>
+    </div>
+    <div class="why-item">
+      <span class="why-num">03</span>
+      <h3>Products that work after</h3>
+      <p>No silicone-heavy stuff that looks good for an hour. What we use is what we sell, because it's what actually holds up.</p>
+    </div>
+  </div>
+</section>
+
+<!-- divider -->
+<div class="pole-divider" aria-hidden="true"></div>
+
+<!-- ============ BOOKING ============ -->
+<section class="booking" id="booking">
+  <div class="container">
+    <p class="section-eyebrow">Book a Slot</p>
+    <h2 class="section-title">Get yourself on the chair</h2>
+    <p class="section-sub">Fill this in, it locks your slot on this device instantly and our team gets your details. No account, no app, no fuss.</p>
+
+    <div class="booking-grid">
+      <!-- FORM -->
+      <form class="booking-form" id="bookingForm" novalidate>
+
+        <div class="field">
+          <label for="svcSelect">Service</label>
+          <select id="svcSelect" name="service" required>
+            <option value="" disabled selected>Choose a service…</option>
+          </select>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="dateInput">Date</label>
+            <input type="date" id="dateInput" name="date" required>
+          </div>
+          <div class="field">
+            <label for="stylistSelect">Stylist</label>
+            <select id="stylistSelect" name="stylist">
+              <option value="any">Any available</option>
+              <option value="Rahul">Rahul</option>
+              <option value="Aman">Aman</option>
+              <option value="Vikram">Vikram</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Time</label>
+          <div class="slot-grid" id="slotGrid">
+            <p class="slot-hint">Pick a date to see open slots.</p>
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="nameInput">Full name</label>
+            <input type="text" id="nameInput" name="name" placeholder="Your name" required>
+          </div>
+          <div class="field">
+            <label for="phoneInput">Phone number</label>
+            <input type="tel" id="phoneInput" name="phone" placeholder="10-digit mobile number" required>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="emailInput">Email <span class="optional">(optional)</span></label>
+          <input type="email" id="emailInput" name="email" placeholder="you@example.com">
+        </div>
+
+        <div class="field">
+          <label for="notesInput">Anything we should know? <span class="optional">(optional)</span></label>
+          <textarea id="notesInput" name="notes" rows="3" placeholder="e.g. skin fade, allergic to a product, etc."></textarea>
+        </div>
+
+        <p class="form-error" id="formError" role="alert"></p>
+
+        <button type="submit" class="btn btn-primary btn-block" id="bookSubmitBtn">Confirm Appointment</button>
+      </form>
+
+      <!-- LIVE TICKET PREVIEW -->
+      <aside class="ticket" id="ticketPreview">
+        <div class="ticket-top">
+          <span class="ticket-label">Appointment</span>
+          <span class="ticket-id" id="ticketId">#— — —</span>
+        </div>
+        <dl class="ticket-rows">
+          <div><dt>Service</dt><dd id="tkService">—</dd></div>
+          <div><dt>Date</dt><dd id="tkDate">—</dd></div>
+          <div><dt>Time</dt><dd id="tkTime">—</dd></div>
+          <div><dt>Stylist</dt><dd id="tkStylist">—</dd></div>
+          <div><dt>Duration</dt><dd id="tkDuration">—</dd></div>
+          <div><dt>Price</dt><dd id="tkPrice">—</dd></div>
+          <div><dt>Guest</dt><dd id="tkName">—</dd></div>
+        </dl>
+        <div class="ticket-edge" aria-hidden="true"></div>
+      </aside>
+    </div>
+
+    <!-- BOOKINGS ON THIS DEVICE -->
+    <div class="my-bookings" id="myBookings">
+      <h3>Bookings on this device</h3>
+      <p class="my-bookings-empty" id="myBookingsEmpty">Nothing booked yet on this device. Once you confirm a slot above, it'll show up here.</p>
+      <ul class="my-bookings-list" id="myBookingsList"></ul>
+    </div>
+  </div>
+</section>
+
+<!-- divider -->
+<div class="pole-divider" aria-hidden="true"></div>
+
+<!-- ============ VISIT / HOURS ============ -->
+<section class="visit" id="visit">
+  <div class="container visit-grid">
+    <div>
+      <p class="section-eyebrow">Visit Us</p>
+      <h2 class="section-title">Find the chair</h2>
+      <p class="section-sub">Walk-ins are welcome between slots, but booked guests always go first.</p>
+
+      <ul class="visit-list">
+        <li><strong>Address</strong><span>Shop 4, Mall Road, Kanpur, Uttar Pradesh — <em>(edit to your real address)</em></span></li>
+        <li><strong>Phone</strong><span><a href="tel:+917651918998">+91 76519 18998</a></span></li>
+        <li><strong>WhatsApp</strong><span><a href="https://wa.me/917651918998?text=Hi!%20I%27d%20like%20to%20know%20more%20about%20your%20services" target="_blank" rel="noopener">Message us on WhatsApp →</a></span></li>
+        <li><strong>Email</strong><span><a href="mailto:hello@gentlemenschair.example">hello@gentlemenschair.example</a></span></li>
+      </ul>
+
+      <a href="https://wa.me/917651918998?text=Hi!%20I%27d%20like%20to%20know%20more%20about%20your%20services" target="_blank" rel="noopener" class="btn btn-whatsapp">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.6.1-.2.3-.7.9-.9 1-.2.2-.4.2-.7.1-1.7-.7-2.8-1.6-3.6-3-.2-.3 0-.5.1-.6.2-.2.4-.5.6-.7.2-.2.2-.4.1-.6-.1-.2-.6-1.5-.8-2-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.4-.2.3-.9 1-.9 2.3 0 1.4 1 2.7 1.1 2.9.1.2 1.9 3 4.7 4.1 2.3.9 2.7.7 3.2.7.5-.1 1.7-.7 1.9-1.4.2-.7.2-1.2.1-1.3-.1-.1-.2-.2-.5-.3z"/><path d="M12 2C6.5 2 2 6.5 2 12c0 1.9.5 3.7 1.5 5.2L2 22l4.9-1.5C8.3 21.5 10.1 22 12 22c5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.2c-1.7 0-3.3-.5-4.6-1.3l-.3-.2-3.1 1 1-3-.2-.3C3.9 15.1 3.3 13.6 3.3 12 3.3 7.2 7.2 3.3 12 3.3S20.7 7.2 20.7 12 16.8 20.2 12 20.2z"/></svg>
+        Chat on WhatsApp
+      </a>
+    </div>
+
+    <div class="visit-right">
+      <div class="hours-card">
+        <h3>Opening hours</h3>
+        <ul class="hours-list" id="hoursList">
+          <li><span>Monday</span><span>10:00 — 20:00</span></li>
+          <li><span>Tuesday</span><span>10:00 — 20:00</span></li>
+          <li><span>Wednesday</span><span>10:00 — 20:00</span></li>
+          <li><span>Thursday</span><span>10:00 — 20:00</span></li>
+          <li><span>Friday</span><span>10:00 — 21:00</span></li>
+          <li><span>Saturday</span><span>09:00 — 21:00</span></li>
+          <li><span>Sunday</span><span>09:00 — 18:00</span></li>
+        </ul>
+      </div>
+
+      <div class="map-card">
+        <h3>Get directions</h3>
+        <div class="map-frame">
+          <iframe
+            src="https://maps.google.com/maps?q=26.9329357,81.2084122&z=16&output=embed"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            aria-label="Map showing the salon location">
+          </iframe>
+        </div>
+        <a class="btn btn-ghost btn-block" target="_blank" rel="noopener"
+           href="https://maps.app.goo.gl/3tvhVZNdSGf5xECC7">
+          Track / Navigate to Salon →
+        </a>
+        <p class="map-note">Pinned to the salon's actual location. To update it later, replace both the coordinates in the map embed and the Google Maps link above, in <code>index.html</code>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="container footer-inner">
+    <div class="brand footer-brand">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 48 48" width="22" height="22"><path d="M14 8 L34 28 M34 8 L14 28" stroke="currentColor" stroke-width="2.4" fill="none" stroke-linecap="round"/><circle cx="11" cy="11" r="4.4" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="11" cy="25" r="4.4" fill="none" stroke="currentColor" stroke-width="2.4"/></svg>
+      </span>
+      <span class="brand-name">The Gentlemen's<em>Chair</em></span>
+    </div>
+    <p class="footer-note">Build with Aditya Kumar</p>
+    <p class="footer-copy">© <span id="year"></span> The Gentlemen's Chair ~ Rahmaan Dakait. All rights reserved. · <a href="admin.html" class="footer-admin-link">Staff login</a></p>
+  </div>
+</footer>
+
+<!-- ============ BOOKING CONFIRMATION MODAL ============ -->
+<div class="modal-overlay" id="bookingModal" aria-hidden="true">
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalHeading">
+    <button class="modal-close" id="bookingModalClose" aria-label="Close">✕</button>
+    <span class="modal-check">✓</span>
+    <h2 id="modalHeading">Thank you, <span id="modalName">there</span>!</h2>
+    <p class="modal-sub">Your appointment is booked — we'll see you then.</p>
+
+    <dl class="modal-rows">
+      <div><dt>Service</dt><dd id="modalService">—</dd></div>
+      <div><dt>Date</dt><dd id="modalDate">—</dd></div>
+      <div><dt>Time</dt><dd id="modalTime">—</dd></div>
+      <div><dt>Stylist</dt><dd id="modalStylist">—</dd></div>
+      <div><dt>Booking ID</dt><dd id="modalId">—</dd></div>
+    </dl>
+
+    <button class="btn btn-primary btn-block" id="bookingModalOk">Got it, thanks!</button>
+  </div>
+</div>
+
+<!-- ============ CHAT WIDGET ============ -->
+<div class="chat-widget" id="chatWidget">
+  <a class="whatsapp-launcher" href="https://wa.me/917651918998?text=Hi!%20I%27d%20like%20to%20know%20more%20about%20your%20services" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.6.1-.2.3-.7.9-.9 1-.2.2-.4.2-.7.1-1.7-.7-2.8-1.6-3.6-3-.2-.3 0-.5.1-.6.2-.2.4-.5.6-.7.2-.2.2-.4.1-.6-.1-.2-.6-1.5-.8-2-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.4-.2.3-.9 1-.9 2.3 0 1.4 1 2.7 1.1 2.9.1.2 1.9 3 4.7 4.1 2.3.9 2.7.7 3.2.7.5-.1 1.7-.7 1.9-1.4.2-.7.2-1.2.1-1.3-.1-.1-.2-.2-.5-.3z"/><path d="M12 2C6.5 2 2 6.5 2 12c0 1.9.5 3.7 1.5 5.2L2 22l4.9-1.5C8.3 21.5 10.1 22 12 22c5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.2c-1.7 0-3.3-.5-4.6-1.3l-.3-.2-3.1 1 1-3-.2-.3C3.9 15.1 3.3 13.6 3.3 12 3.3 7.2 7.2 3.3 12 3.3S20.7 7.2 20.7 12 16.8 20.2 12 20.2z"/></svg>
+  </a>
+
+  <button class="chat-launcher" id="chatLauncher" aria-label="Open chat">
+    <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+    <span class="chat-dot" id="chatDot"></span>
+  </button>
+
+  <div class="chat-panel" id="chatPanel" aria-hidden="true">
+    <div class="chat-head">
+      <div>
+        <strong>The Gentlemen's Chair</strong>
+        <span class="chat-status"><i></i>Usually replies in a few minutes</span>
+      </div>
+      <button class="chat-close" id="chatClose" aria-label="Close chat">✕</button>
+    </div>
+    <a class="chat-whatsapp-row" href="https://wa.me/917651918998?text=Hi!%20I%27d%20like%20to%20know%20more%20about%20your%20services" target="_blank" rel="noopener">
+      Prefer WhatsApp? Message us directly →
+    </a>
+    <div class="chat-body" id="chatBody"></div>
+    <div class="chat-typing" id="chatTyping" hidden><span></span><span></span><span></span></div>
+    <form class="chat-input-row" id="chatForm">
+      <input type="text" id="chatInput" placeholder="Type a message…" autocomplete="off">
+      <button type="submit" aria-label="Send">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+      </button>
+    </form>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.min.js" defer></script>
+<script src="js/three-hero.js" defer></script>
+<script src="js/account.js" defer></script>
+<script src="js/services-data.js" defer></script>
+<script src="js/main.js" defer></script>
+<script src="js/chat.js" defer></script>
+</body>
+</html>

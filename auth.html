@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Log in or Sign up — The Gentlemen's Chair</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>%E2%9C%82%EF%B8%8F</text></svg>">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/auth.css">
+</head>
+<body class="auth-body">
+
+<div class="auth-wrap">
+  <div class="auth-card">
+
+    <div class="auth-brand">
+      <span class="brand-mark"><svg viewBox="0 0 48 48" width="26" height="26"><path d="M14 8 L34 28 M34 8 L14 28" stroke="currentColor" stroke-width="2.4" fill="none" stroke-linecap="round"/><circle cx="11" cy="11" r="4.4" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="11" cy="25" r="4.4" fill="none" stroke="currentColor" stroke-width="2.4"/></svg></span>
+      <span class="brand-name">The Gentlemen's<em>Chair</em></span>
+    </div>
+    <p class="auth-intro">Please log in or create an account to continue to the website.</p>
+
+    <!-- ====== TABS ====== -->
+    <div class="auth-tabs">
+      <button type="button" class="auth-tab active" data-tab="login">Log in</button>
+      <button type="button" class="auth-tab" data-tab="signup">Sign up</button>
+    </div>
+
+    <!-- ====== LOGIN PANEL ====== -->
+    <form class="auth-panel active" id="loginPanel" data-panel="login">
+      <div class="field">
+        <label for="loginUsername">Username</label>
+        <input type="text" id="loginUsername" placeholder="Your username" autocomplete="username" required>
+      </div>
+      <div class="field">
+        <label for="loginPassword">Password</label>
+        <input type="password" id="loginPassword" placeholder="Your password" autocomplete="current-password" required>
+      </div>
+
+      <p class="form-error" id="loginError"></p>
+      <button type="submit" class="btn btn-primary btn-block">Log in</button>
+
+      <p class="auth-switch">New here? <button type="button" data-switch="signup">Create an account</button></p>
+    </form>
+
+    <!-- ====== SIGNUP PANEL ====== -->
+    <form class="auth-panel" id="signupPanel" data-panel="signup">
+      <div class="field">
+        <label for="signupName">Full name</label>
+        <input type="text" id="signupName" placeholder="Your name" autocomplete="name" required>
+      </div>
+      <div class="field">
+        <label for="signupPhone">Phone number <span class="optional">(optional — pre-fills your bookings)</span></label>
+        <input type="tel" id="signupPhone" placeholder="10-digit mobile number" autocomplete="tel">
+      </div>
+      <div class="field">
+        <label for="signupUsername">Choose a username</label>
+        <input type="text" id="signupUsername" placeholder="At least 3 characters" autocomplete="username" required>
+      </div>
+      <div class="field">
+        <label for="signupPassword">Choose a password</label>
+        <input type="password" id="signupPassword" placeholder="At least 6 characters" autocomplete="new-password" required>
+      </div>
+      <div class="field">
+        <label for="signupPassword2">Confirm password</label>
+        <input type="password" id="signupPassword2" placeholder="Type it again" autocomplete="new-password" required>
+      </div>
+
+      <p class="form-error" id="signupError"></p>
+      <button type="submit" class="btn btn-primary btn-block">Create account</button>
+
+      <p class="auth-switch">Already have an account? <button type="button" data-switch="login">Log in</button></p>
+    </form>
+
+    <!-- ====== SUCCESS ====== -->
+    <div class="auth-success" id="authSuccess">
+      <span class="check">✓</span>
+      <h2 id="successHeading">Welcome!</h2>
+      <p>Taking you to the website…</p>
+      <a href="index.html" class="btn btn-primary">Continue to website</a>
+    </div>
+
+    <p class="auth-footer-note">Salon owner? <a href="admin.html">Staff login →</a></p>
+  </div>
+</div>
+
+<script src="js/account.js"></script>
+<script src="js/auth.js"></script>
+</body>
+</html>

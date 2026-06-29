@@ -1,0 +1,56 @@
+/* ============================================================
+   AUTH.CSS — customer login / signup page
+   Builds on tokens/fonts from css/style.css
+   ============================================================ */
+.auth-body{min-height:100vh;background:var(--ink);}
+.auth-wrap{
+  min-height:100vh;display:flex;align-items:center;justify-content:center;
+  padding:24px;
+  background:radial-gradient(ellipse at 50% 0%, #241a12 0%, var(--ink) 65%);
+}
+.auth-card{
+  width:100%;max-width:420px;
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:34px 32px;
+}
+.auth-brand{display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:10px;color:var(--ivory);}
+.auth-brand .brand-mark{color:var(--brass-bright);}
+.auth-brand .brand-name{font-size:17px;}
+.auth-intro{text-align:center;color:var(--ivory-faint);font-size:13px;margin:0 0 22px;}
+
+.auth-tabs{display:flex;border-bottom:1px solid var(--line);margin-bottom:24px;}
+.auth-tab{
+  flex:1;background:none;border:none;color:var(--ivory-faint);
+  font-weight:600;font-size:14.5px;padding:10px 0 14px;cursor:pointer;
+  border-bottom:2px solid transparent;margin-bottom:-1px;
+  transition:color .2s ease, border-color .2s ease;
+}
+.auth-tab.active{color:var(--ivory);border-color:var(--brass-bright);}
+
+.auth-panel{display:none;flex-direction:column;gap:16px;}
+.auth-panel.active{display:flex;}
+
+.auth-panel .field{display:flex;flex-direction:column;gap:7px;}
+.auth-panel label{font-size:13px;font-weight:600;color:var(--ivory-dim);}
+.auth-panel label .optional{color:var(--ivory-faint);font-weight:400;}
+
+.auth-switch{text-align:center;font-size:13.5px;color:var(--ivory-faint);margin-top:4px;}
+.auth-switch button{
+  background:none;border:none;color:var(--brass-bright);font-weight:600;cursor:pointer;padding:0;font-size:13.5px;
+}
+
+.auth-success{display:none;text-align:center;flex-direction:column;gap:14px;align-items:center;}
+.auth-success.show{display:flex;}
+.auth-success .check{
+  width:54px;height:54px;border-radius:50%;background:var(--brass-bright);color:#1a1309;
+  display:flex;align-items:center;justify-content:center;font-size:26px;
+}
+.auth-success h2{font-family:var(--font-display);font-size:21px;margin:0;font-weight:600;}
+.auth-success p{color:var(--ivory-dim);font-size:13.5px;margin:0;}
+
+.auth-footer-note{text-align:center;margin-top:22px;font-size:12.5px;color:var(--ivory-faint);}
+.auth-footer-note a{text-decoration:underline;text-decoration-color:var(--line);}
+
+.form-error{color:var(--burgundy-bright);font-size:13px;margin:0;min-height:1px;}
