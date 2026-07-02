@@ -113,7 +113,7 @@
       return "Head massage is ₹350 / 30 min, full body massage is ₹600 / 45 min. Both are popular for a reason!";
     }
     if (/(whatsapp|call|contact|number|phone)/.test(t)) {
-      return "You can reach us directly on WhatsApp at +91 76519 18998 — tap the green button to start chatting right away.";
+      return "You can reach us directly on WhatsApp at +91 93055 63167 — tap the green button to start chatting right away.";
     }
     if (/(thank|thanks|great|cool|nice)/.test(t)) {
       return "Anytime! See you in the chair. 🪒";
